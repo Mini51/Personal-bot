@@ -11,9 +11,8 @@ module.exports = {
    */
   async execute(interaction) {
     const member = interaction.member;
-    const role = interaction.guild.roles.cache.find(
-      (role) => role.id === "976692270025826355" // hard codded since this is a bot for my own server
-    );
+    const role = interaction.guild.roles.cache.find((role) => role.id === "898387681673875548");
+
     if (member.roles.cache.has(role.id)) {
       interaction.reply({
         content: "⚠ You are already verified",
@@ -21,7 +20,6 @@ module.exports = {
       });
     } else {
       member.roles.add(role);
-      interaction.client.Logger.success(`User ${member.user.tag} has been verified`);
       interaction.reply({
         content: "✅ You have been verified",
         ephemeral: true,
