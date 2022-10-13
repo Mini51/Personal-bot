@@ -8,26 +8,18 @@ class logger {
     this.timestampBool = options.logTime;
     this.logPath = options.logPath;
 
-    const startDate = new Date();
+    let startTime = getTimestamp();
+    // REPLACE ALL / AND : WITH - TO AVOID ERRORS
+    startTime = startTime.replace(/\//g, "-");
+    startTime = startTime.replace(/:/g, "-");
 
-    this.file = fs.writeFileSync(
-      path.join(
-        cwd(),
-        this.logPath,
-        `${startDate.getDate()}-${startDate.getMonth()}-${startDate.getFullYear()}.log`
-      ),
-      "",
-      { flag: "a+" }
-    );
+    this.file = fs.writeFileSync(path.join(cwd(), this.logPath, `${startTime}.log`), "", {
+      flag: "a+",
+    });
 
-    this.file = fs.createWriteStream(
-      path.join(
-        cwd(),
-        this.logPath,
-        `${startDate.getDate()}-${startDate.getMonth()}-${startDate.getFullYear()}.log`
-      ),
-      { flags: "a+" }
-    );
+    this.file = fs.createWriteStream(path.join(cwd(), this.logPath, `111.log`), {
+      flags: "a+",
+    });
 
     this.info("Logger initialized");
   }
